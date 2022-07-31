@@ -1,38 +1,31 @@
-let playGame = confirm('Shall we play Rock, Paper or Scissor')
-if (playGame){
-    let playerChoice = prompt('Choose: Rock, Paper or Scissor')
-    if(playerChoice){
-        let playerOne = playerChoice.toLowerCase()
-        if (playerOne === 'rock'||playerOne ==='paper'||playerOne ==='scissor')
-        {    
-          let computerSelect = Math.floor(Math.random()*3+1)
-          let computer =
-            computerSelect===1?'rock':
-            computerSelect===2?'paper':
-          'scissor';
-          let result = 
-            playerOne === computer ?"It's a tie":
-            playerOne==='rock'&& computer==='paper'? `player: ${playerChoice} and computer: ${computer} \nComputer wins`:
-            playerOne==='paper'&& computer==='scissor'? `player: ${playerChoice} and computer: ${computer} \nComputer wins`:
-            playerOne==='scissor'&& computer==='rock'? `player: ${playerChoice} and computer: ${computer} \nComputer wins`:
-            `player: ${playerChoice} and computer: ${computer} \nYou win`;
-            alert(result)
-          let playAgain = confirm("Play another Round ?")?location.reload() :
-            alert('Thank you for playing with us');
-            
-        }else{
-            alert("Please choose correctly")
-            location.reload();
-        }
-        
-    }else{
-        alert('Change of mind!, maybe next time then.')
-    }
-}else{
-    alert ('Maybe next time then.')
+let userChoiceDisplay = document.getElementById('user-Choice')
+let computerChoiceDisplay = document.getElementById('computer-Choice')
+let result = document.getElementById('result-display')
+let possibleChoices = document.querySelectorAll('button')
+
+let userChoice
+
+
+possibleChoices.forEach(possibleChoice => possibleChoice.addEventListener('click', (e)=>{
+    userChoice = e.target.id
+    userChoiceDisplay.innerHTML= userChoice
+    generatecomputerChoice()
+    generateResult()
+}))
+
+function generatecomputerChoice(){
+    let random = Math.floor(Math.random()*possibleChoices.length)
+    randomChoice = random === 0? "rock" :
+                   random === 1? "paper":
+                   "scissor";
+    computerChoiceDisplay.innerHTML = randomChoice
 }
 
-// function getComputerChoice (){
-//   let computer = Math.floor(Math.random()*3+1)
-  
-// }
+function generateResult(){
+    let con= userChoice===randomChoice?'Its a tie':
+    userChoice==='rock'&&randomChoice==='paper'? 'computer wins':
+    userChoice==='paper'&&randomChoice==='scissor'? 'computer wins':
+    userChoice==='scissor'&&randomChoice==='rock'? 'computer wins':
+    'You win';
+    result.innerHTML= con
+}
