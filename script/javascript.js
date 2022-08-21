@@ -1,31 +1,54 @@
-let userChoiceDisplay = document.getElementById('user-Choice')
-let computerChoiceDisplay = document.getElementById('computer-Choice')
-let result = document.getElementById('result-display')
-let possibleChoices = document.querySelectorAll('button')
+const game  = document.querySelector('#game')
+const heading = document.createElement('h1')
+const gameChoice = document.createElement('div')
+const playerDisplay = document.createElement('h2')
+const computerDisplay = document.createElement('h2')
+const resultDisplay = document.createElement('h2')
 
-let userChoice
+game.append(heading,gameChoice,playerDisplay,computerDisplay,resultDisplay);
 
+heading.innerHTML = "Welcome to Rock , Paper n Scissors";
+let chosen; let generated;
 
-possibleChoices.forEach(possibleChoice => possibleChoice.addEventListener('click', (e)=>{
-    userChoice = e.target.id
-    userChoiceDisplay.innerHTML= userChoice
-    generatecomputerChoice()
-    generateResult()
-}))
+const choices = ['✌️','✋','✊'];
+choices.forEach(choice =>{
+    const button = document.createElement('button');
+    button.innerHTML = choice;
+    gameChoice.append(button);
+    button.addEventListener('click', e=>{
+        chosen = e.target.innerHTML;
+        playerDisplay.innerHTML = `player : ${chosen}`;
+        genComputerChoice();
+        result();
+    })
 
-function generatecomputerChoice(){
-    let random = Math.floor(Math.random()*possibleChoices.length)
-    randomChoice = random === 0? "rock" :
-                   random === 1? "paper":
-                   "scissor";
-    computerChoiceDisplay.innerHTML = randomChoice
+})
+
+let genComputerChoice = ()=> {
+    generated = choices[Math.floor(Math.random()*choices.length)]
+    computerDisplay.innerHTML = `Computer : ${generated}`;
 }
 
-function generateResult(){
-    let con= userChoice===randomChoice?'Its a tie':
-    userChoice==='rock'&&randomChoice==='paper'? 'computer wins':
-    userChoice==='paper'&&randomChoice==='scissor'? 'computer wins':
-    userChoice==='scissor'&&randomChoice==='rock'? 'computer wins':
-    'You win';
-    result.innerHTML= con
+
+let result = () =>{
+    switch(chosen+generated){
+        case '✌️✋':
+        case '✋✊':
+        case '✊✌️':
+        resultDisplay.innerHTML=  'You win'
+        break
+
+        case '✋✌️':
+        case '✊✋':
+        case '✌️✊':
+        resultDisplay.innerHTML=  'Computer wins'
+        break
+
+        case '✌️✌️':
+        case '✋✋':
+        case '✊✊':
+        resultDisplay.innerHTML=  'Tie Match'
+        break
+    }
 }
+

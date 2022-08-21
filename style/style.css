@@ -2,7 +2,7 @@
 *{
     background-color: #F28705;   
 }
-h1,h3{
+h1,h2{
     color: #F2CB05;
 }
 body {
@@ -13,11 +13,12 @@ body {
     font-family: 'Orbitron', sans-serif;
     
 }
-div.choose{
-    margin-top: 200px;
+#game{
+    margin-top: 100px;
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    flex-direction: column;
+    justify-content:center;
+    align-items: center;
     gap: 35px;
 }
 button:hover{
@@ -33,17 +34,5 @@ button{
     font-size: 100px;
     align-items: center;
     justify-content: center;
-    
-}
-.data{
-    
-    display:flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    gap: 200px;
-    
-}
-.user,.computer,.result{
-    margin-top: 50px;
     
 }
